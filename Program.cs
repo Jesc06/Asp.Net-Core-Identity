@@ -3,6 +3,7 @@ using Asp.NetCore_Identity_Auth.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,16 +13,17 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<_DbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("database")));
 
 
-builder.Services.AddIdentity<login, IdentityRole>(option =>
+builder.Services.AddIdentity<Users, IdentityRole>(option =>
 {
-    option.Password.RequireNonAlphanumeric = false;
-    option.Password.RequiredLength = 8;
-    option.Password.RequireUppercase = false;
+    option.Password.RequireDigit = false;
     option.Password.RequireLowercase = false;
-    option.User.RequireUniqueEmail = true;
-    option.SignIn.RequireConfirmedAccount = false;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequiredLength = 3;
+
+    option.User.RequireUniqueEmail = true; 
     option.SignIn.RequireConfirmedEmail = false;
-    option.SignIn.RequireConfirmedPhoneNumber = false;
+
 })
     .AddEntityFrameworkStores<_DbContext>()
     .AddDefaultTokenProviders();
@@ -40,11 +42,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
+
+
 
 app.MapControllerRoute(
     name:"default",
-    pattern:"{controller=Home}/{action=Index}/{id?}"
+    pattern: "{controller=Account}/{action=login}/{id?}"
 );
 
 app.Run();

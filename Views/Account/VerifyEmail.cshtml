@@ -1,0 +1,17 @@
+﻿@model VerifyEmailViewModel;
+
+@{
+    Layout = "~/Views/Shared/_Account.cshtml";
+}
+
+
+
+<form asp-controller="Account" asp-action="Trying_VerifyEmail" method="post">
+
+    <div asp-validation-summary="All"></div>
+    <label asp-for="Email"></label><br>
+    <input asp-for="Email" /><br>
+    <input type="submit" value="Verify Email" />
+
+</form>
+

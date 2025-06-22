@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Asp.NetCore_Identity_Auth.Models
 {
-    public class login : IdentityUser
+    public class Users : IdentityUser
     {
-       public string fullname { get; set; }
+       public string Fullname { get; set; }
     }
 }

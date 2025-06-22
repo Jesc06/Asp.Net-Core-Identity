@@ -16,9 +16,9 @@ namespace Asp.NetCore_Identity_Auth.ViewModels
 
 
         [Required(ErrorMessage = "Password is required")]
-        [StringLength(40, MinimumLength = 8, ErrorMessage = "The {0} must be at {2} and at max {1} characters" )]
+        [StringLength(40, MinimumLength = 3, ErrorMessage = "The {0} must be at {2} and at max {1} characters" )]
         [DataType(DataType.Password)]
-        [Compare("ConfirmPassword",ErrorMessage = "Password does not match.")]
+        [Compare("ConfirmPassword", ErrorMessage = "Password does not match.")]
         public string Password { get; set; }
 
 

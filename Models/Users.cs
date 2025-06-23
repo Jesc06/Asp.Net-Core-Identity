@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 
 namespace Asp.NetCore_Identity_Auth.Models
 {

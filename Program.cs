@@ -1,18 +1,19 @@
 using Asp.NetCore_Identity_Auth.Database;
 using Asp.NetCore_Identity_Auth.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+//for MVC registration
 builder.Services.AddControllersWithViews();
 
+//for DbContext Configuration
 builder.Services.AddDbContext<_DbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("database")));
 
-
+//Setup for Identity Auth configuration
 builder.Services.AddIdentity<Users, IdentityRole>(option =>
 {
     option.Password.RequireDigit = false;
@@ -26,7 +27,7 @@ builder.Services.AddIdentity<Users, IdentityRole>(option =>
 
 })
     .AddEntityFrameworkStores<_DbContext>()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders();    
 
 
 var app = builder.Build();
@@ -46,10 +47,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-
 app.MapControllerRoute(
     name:"default",
     pattern: "{controller=Account}/{action=login}/{id?}"
 );
+
 
 app.Run();

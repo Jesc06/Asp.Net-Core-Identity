@@ -19,7 +19,7 @@ namespace Asp.NetCore_Identity_Auth.Controllers
             userManager = _userManager; 
         }
 
-        
+        //check if success if true user cannot back to the login page anymore
         public IActionResult login()
         {
             if (User.Identity.IsAuthenticated)
@@ -34,18 +34,19 @@ namespace Asp.NetCore_Identity_Auth.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure:false);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index","Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Incorrect email and password");
+                    ModelState.AddModelError("", "Incorrect email or password");
                 }
             }
             return View("login");
         }
+
 
 
         public IActionResult Register()
@@ -105,6 +106,7 @@ namespace Asp.NetCore_Identity_Auth.Controllers
             }
             return View("VerifyEmail"); 
         }
+
 
 
 

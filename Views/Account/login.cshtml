@@ -6,6 +6,8 @@
 
 <form asp-controller="Account" asp-action="Trying_Login" method="post">
 
+    <div asp-validation-summary="All"></div>
+
     <label asp-for="Email"></label><br>
     <input asp-for="Email" /><br>
     <span asp-validation-for="Email" ></span><br>

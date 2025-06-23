@@ -17,14 +17,14 @@ namespace Asp.NetCore_Identity_Auth.ViewModels
 
         [Required(ErrorMessage = "Password is required")]
         [StringLength(40, MinimumLength = 3, ErrorMessage = "The {0} must be at {2} and at max {1} characters" )]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password)]//this code is for masking textbox for password
         [Compare("ConfirmPassword", ErrorMessage = "Password does not match.")]
         public string Password { get; set; }
 
 
 
         [Required(ErrorMessage = "Confirm Password is required")]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password)]//this code is for masking textbox for password
         public string ConfirmPassword { get; set; }
 
     }
